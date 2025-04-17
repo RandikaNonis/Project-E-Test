@@ -1,0 +1,17 @@
+/* Flexbox container to arrange the divs vertically */
+.wrapperContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+}
+
+.actionContent {
+  padding-bottom: 30px;
+}
+
+.logo {
+  width: 32px;
+}
