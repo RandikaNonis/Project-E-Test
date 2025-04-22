@@ -1,23 +1,39 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { usePrivy } from "@privy-io/react-auth";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { FormattedMessage } from "react-intl";
 
 const Dashboard: React.FC = () => {
-  const { logout, authenticated } = usePrivy();
   const navigate = useNavigate();
+  const { logout } = usePrivy();
 
-  useEffect(() => {
-    if (!authenticated) {
-      // Redirect to home page after logout
-      navigate("/");
-    }
-  }, [authenticated, navigate]);
+  const handleOnClink = () => {
+    sessionStorage.removeItem("language");
+    logout();
+    navigate("/");
+  };
 
   return (
     <div>
-      <h1>This is Dashboard</h1>
-      <Button onClick={logout}>Logout</Button>
+      <h1>
+        <FormattedMessage id={"loveMessage"} defaultMessage={"I love you"} />
+      </h1>
+      <h2>
+        <FormattedMessage
+          id={"testing"}
+          defaultMessage={"This message is for testing"}
+        />
+      </h2>
+      <h3>
+        <FormattedMessage
+          id={"helloWorld"}
+          defaultMessage={"This is a hello world message"}
+        />
+      </h3>
+      <Button onClick={handleOnClink}>
+        <FormattedMessage id={"logout"} defaultMessage={"Logout"} />
+      </Button>
     </div>
   );
 };

@@ -1,0 +1,8 @@
+{
+  "helloWorld": "Este es un mensaje de hola mundo",
+  "homeLink": "Inicio",
+  "logout": "Cerrar sesión",
+  "loveMessage": "",
+  "pageNotFound": "404 No encontrado",
+  "testing": "Este mensaje es para probar"
+}

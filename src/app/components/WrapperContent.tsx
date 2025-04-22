@@ -9,11 +9,11 @@ import EveryThingLooksGood from "./EverythingLooksGood";
 
 const WrapperContent: React.FC = () => {
   const navigate = useNavigate();
-  const { logout, authenticated } = usePrivy();
+  const { authenticated } = usePrivy();
 
   const handleContinue = () => {
     if (authenticated) {
-      logout();
+      navigate("/");
     } else {
       navigate("/login");
     }

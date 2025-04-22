@@ -1,18 +1,27 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { createBrowserRouter } from "react-router-dom";
+import PageNotFound from "./app/components/PageNotFound";
 import WrapperContent from "./app/components/WrapperContent";
+import ProtectedRoutes from "./utils/ProtectedRoutes";
 import Login from "./app/components/Login";
 import Dashboard from "./app/components/Dashboard";
 
-const AppRoutes: React.FC = () => {
-  return (
-    <Routes>
-      <Route path="/" element={<Login />} />
-      <Route path="/layout" element={<WrapperContent />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/dashboard" element={<Dashboard />} />
-    </Routes>
-  );
-};
-
-export default AppRoutes;
+export const router = createBrowserRouter([
+  {
+    path: "/login",
+    element: <Login />,
+  },
+  {
+    element: <ProtectedRoutes />,
+    children: [
+      {
+        path: "/",
+        element: <Dashboard />,
+        errorElement: <PageNotFound/>
+      }
+    ],
+  },
+  {
+    path: "/layout",
+    element: <WrapperContent />,
+  }
+]);

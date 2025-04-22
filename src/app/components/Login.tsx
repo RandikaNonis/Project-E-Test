@@ -7,16 +7,19 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (ready) {  
-        if (authenticated) {
-          navigate("/layout", { replace: true });
-        } else{
-          login();
-        }
-      }
+    if (!ready) return;
+
+    if (authenticated) {
+      // ✅ Login successful
+      console.log("User successfully logged in");
+      navigate("/layout", { replace: true });
+    } else {
+      // 👇 Trigger login only if not authenticated
+      login();
+    }
   }, [ready, authenticated, login, navigate]);
 
-  return <></>;
+  return null;
 };
 
 export default Login;

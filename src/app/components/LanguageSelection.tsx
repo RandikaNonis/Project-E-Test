@@ -9,10 +9,13 @@ import {
 import Title from '../shared/Title';
 
 const LanguageSelection: React.FC = () => {
-  const [language, setLanguage] = React.useState('');
+  const [language, setLanguage] = React.useState<string>(sessionStorage.getItem('language') || '');
 
   const handleChange = (event: SelectChangeEvent) => {
-    setLanguage(event.target.value as string);
+    const selectedLanguage = event.target.value as string;
+    setLanguage(selectedLanguage);
+    // Store the selected language in sessionStorage
+    sessionStorage.setItem('language', selectedLanguage);
   };
 
   return (
