@@ -20,16 +20,14 @@ const WrapperContent: React.FC = () => {
   };
 
   return (
-    <div className={styles.wrapperContent}>
-      <div className="logo-content">
+    <div className={styles.layoutContainer}>
+      <div className={styles.topContent}>
         <img src={logo} alt="logo" className={styles.logo} />
       </div>
-
-      <div className={styles.middleContent}>
+      <div className={styles.centerContent}>
         {authenticated ? <EveryThingLooksGood /> : <LanguageSelection />}
       </div>
-
-      <div className={styles.actionContent}>
+      <div className={styles.bottomContent}>
         <SharedButton
           text={authenticated ? "Yes, looks good" : "Continue"}
           withIcon={!authenticated}

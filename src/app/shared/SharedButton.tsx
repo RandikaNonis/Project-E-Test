@@ -1,22 +1,26 @@
-import React from 'react';
-import { Button } from '@mui/material';
-import { ArrowForward } from '@mui/icons-material';
+import React from "react";
+import { Button } from "@mui/material";
+import { ArrowForward } from "@mui/icons-material";
 
 interface SharedButtonProps {
   onClick?: () => void;
-  text: string,
-  withIcon: boolean
+  text: string;
+  withIcon: boolean;
 }
 
-const SharedButton: React.FC<SharedButtonProps> = ({ onClick, text, withIcon }) => {
+const SharedButton: React.FC<SharedButtonProps> = ({
+  onClick,
+  text,
+  withIcon,
+}) => {
   const buttonStyles = {
-    width: '360px',
-    backgroundColor: '#1976D2',
-    borderRadius: '5px',
+    backgroundColor: "#1976D2",
+    borderRadius: "5px",
   };
 
   return (
     <Button
+      fullWidth
       onClick={onClick}
       sx={buttonStyles}
       variant="contained"

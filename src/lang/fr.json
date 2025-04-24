@@ -2,7 +2,7 @@
   "helloWorld": "Ceci est un message de bienvenue",
   "homeLink": "Accueil",
   "logout": "Se déconnecter",
-  "loveMessage": "",
+  "loveMessage": "Je t’aime",
   "pageNotFound": "404 Introuvable",
   "testing": "Ce message est pour le test"
 }

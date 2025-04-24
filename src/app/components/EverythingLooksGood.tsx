@@ -19,7 +19,6 @@ const EveryThingLooksGood: React.FC = () => {
           marginTop: "15px",
           "& .MuiTextField-root": {
             m: 1,
-            width: "30ch",
             margin: "8px 0",
           },
         }}
@@ -28,6 +27,7 @@ const EveryThingLooksGood: React.FC = () => {
       >
         <div>
           <TextField
+            fullWidth
             required
             id="outlined-required"
             label="Name"
@@ -36,6 +36,7 @@ const EveryThingLooksGood: React.FC = () => {
         </div>
         <div>
           <TextField
+            fullWidth
             required
             id="outlined-disabled"
             label="Email"
@@ -45,6 +46,7 @@ const EveryThingLooksGood: React.FC = () => {
         </div>
         <div>
           <TextField
+            fullWidth
             required
             id="outlined-disabled"
             label="Language"
