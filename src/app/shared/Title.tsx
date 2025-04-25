@@ -3,8 +3,8 @@ import styles from '../styles/Title.module.css';
 import '../../index.css';
 
 interface TitleProps {
-  mainText: string;
-  highlightText: string;
+  mainText: React.ReactNode;
+  highlightText: React.ReactNode;
   highlightTextColor: string;
 }
 

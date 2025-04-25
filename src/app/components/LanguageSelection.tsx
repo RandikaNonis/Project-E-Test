@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import Title from "../shared/Title";
 import { useI18n } from "../../i18n";
+import { FormattedMessage } from "react-intl";
 
 export type Locale = "en" | "fr" | "es";
 
@@ -21,12 +22,24 @@ const LanguageSelection: React.FC = () => {
   return (
     <>
       <Title
-        mainText={"What’s your preferred"}
-        highlightText={" Language?"}
+        mainText={
+          <FormattedMessage
+            id="languageSelection.mainText"
+            defaultMessage="What’s your preferred"
+          />
+        }
+        highlightText={
+          <FormattedMessage
+            id="languageSelection.highlightText"
+            defaultMessage=" Language?"
+          />
+        }
         highlightTextColor={"#0083C6"}
       />
       <FormControl sx={{ marginTop: "15px" }} fullWidth>
-        <InputLabel id="language-label">Language</InputLabel>
+        <InputLabel id="language-label">
+          <FormattedMessage id={"language"} defaultMessage={"Language"} />
+        </InputLabel>
         <Select
           fullWidth
           labelId="language-label"

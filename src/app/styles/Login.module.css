@@ -1,0 +1,80 @@
+.divider {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  margin: 3rem 0;
+  width: 100%;
+  opacity: 60%;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-bottom: 1px solid #ccc;
+}
+
+.divider:not(:empty)::before {
+  margin-right: 0.5em;
+}
+
+.divider:not(:empty)::after {
+  margin-left: 0.5em;
+}
+
+.googleSignInButton {
+  background-color: white;
+  color: #757575;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.googleLogo {
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTgiIGhlaWdodD0iMTgiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNMTcuNiA5LjJsLS4xLTEuOEg5djMuNGg0LjhDMTMuNiAxMiAxMyAxMyAxMiAxMy42djIuMmgzYTguOCA4LjggMCAwIDAgMi42LTYuNnoiIGZpbGw9IiM0Mjg1RjQiIGZpbGwtcnVsZT0ibm9uemVybyIvPjxwYXRoIGQ9Ik05IDE4YzIuNCAwIDQuNS0uOCA2LTIuMmwtMy0yLjJhNS40IDUuNCAwIDAgMS04LTIuOUgxVjEzYTkgOSAwIDAgMCA4IDV6IiBmaWxsPSIjMzRBODUzIiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNNCAxMC43YTUuNCA1LjQgMCAwIDEgMC0zLjRWNUgxYTkgOSAwIDAgMCAwIDhsMy0yLjN6IiBmaWxsPSIjRkJCQzA1IiBmaWxsLXJ1bGU9Im5vbnplcm8iLz48cGF0aCBkPSJNOSAzLjZjMS4zIDAgMi41LjQgMy40IDEuM0wxNSAyLjNBOSA5IDAgMCAwIDEgNWwzIDIuNGE1LjQgNS40IDAgMCAxIDUtMy43eiIgZmlsbD0iI0VBNDMzNSIgZmlsbC1ydWxlPSJub256ZXJvIi8+PHBhdGggZD0iTTAgMGgxOHYxOEgweiIvPjwvZz48L3N2Zz4=);
+}
+
+.appleButton {
+  background-color: black;
+  color: white;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.appleButton:hover {
+  background-color: #1a1a1a;
+}
+
+.facebookLogo {
+  background-image: url("data:image/svg+xml;base64,PHN2ZyBmaWxsPSIjZmZmZmZmIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxOCIgaGVpZ2h0PSIxOCIgdmlld0JveD0iMCAwIDI0IDI0Ij48cGF0aCBkPSJNMTIgMEM1LjM3IDAgMCA1LjM3IDAgMTJzNS4zNyAxMiAxMiAxMiAxMi01LjM3IDEyLTEyUzE4LjYzIDAgMTIgMHptMi42NiAxMi43aC0yLjEzVjIySDkuODRWMTIuN2gtMS42VjEwLjJoMS42VjguODJjMC0xLjMyLjM5LTIuMyAxLjYzLTIuOTIgMS4xMy0uNTQgMi4zMy0uNTIgMy4xOS0uNDl2MS44M2gtMS4zMmMtLjcyIDAtMS4yOS41OS0xLjI5IDEuMzN2MS42NmgzLjA1bC0uNDkgMi41NnoiLz48L3N2Zz4=");
+}
+
+.facebookSignInButton {
+  background-color: #1877F2;
+  color: white;
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.socialButtonsLogo {
+  width: 18px;
+  height: 18px;
+}
+
+.socialButtons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 500;
+  font-size: 14px;
+  border: none;
+  border-radius: 6px;
+  padding: 10px 16px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+    Ubuntu, Cantarell, "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
+  width: 100%;
+  margin-bottom: 20px;
+  gap: 10px;
+}
+
+.socialButtons:hover {
+  box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.04), 0 2px 4px rgba(0, 0, 0, 0.25);
+}
