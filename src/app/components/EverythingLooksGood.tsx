@@ -9,12 +9,16 @@ import {
   SelectChangeEvent,
   TextField,
 } from "@mui/material";
-import { usePrivy } from "@privy-io/react-auth";
+// import { usePrivy } from "@privy-io/react-auth";
 import { Locale, useI18n } from "../../i18n";
 import { FormattedMessage } from "react-intl";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store";
 
 const EveryThingLooksGood: React.FC = () => {
-  const { user } = usePrivy();
+  // const { user } = usePrivy();
+  const user = useSelector((state: RootState) => state.user.userInfo);
+  console.log(user);
   const { locale, setLocale } = useI18n();
 
   const handleChange = (event: SelectChangeEvent) => {
@@ -58,7 +62,7 @@ const EveryThingLooksGood: React.FC = () => {
             label={
               <FormattedMessage id="user.nameLabel" defaultMessage="Name" />
             }
-            value={user?.google?.name}
+            value={user?.name}
           />
         </div>
         <div>
@@ -68,7 +72,7 @@ const EveryThingLooksGood: React.FC = () => {
             id="outlined-disabled"
             label={<FormattedMessage id="user.email" defaultMessage="Email" />}
             type="email"
-            value={user?.google?.email}
+            value={user?.email}
           />
         </div>
         <FormControl sx={{ marginTop: "15px" }} fullWidth>

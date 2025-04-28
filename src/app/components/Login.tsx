@@ -4,11 +4,18 @@ import React from "react";
 import { FormattedMessage } from "react-intl";
 import SharedButton from "../shared/SharedButton";
 import styles from "../styles/Login.module.css";
-import { useGoogleLogin } from '@react-oauth/google';
+import { useGoogleLogin } from "@react-oauth/google";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { setCurrentPage } from "../../store/slices/pageSlice";
+import { setUserInfo } from "../../store/slices/userSlice";
+import { useNavigate } from "react-router-dom";
 // import { usePrivy } from "@privy-io/react-auth";
 // import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   // const { login, ready, authenticated } = usePrivy();
   // const navigate = useNavigate();
 
@@ -26,9 +33,36 @@ const Login: React.FC = () => {
   // }, [ready, authenticated, login, navigate]);
 
   const login = useGoogleLogin({
-    onSuccess: codeResponse => console.log(codeResponse),
-    flow: 'auth-code',
+    onSuccess: async (tokenResponse) => {
+      console.log("Access Token:", tokenResponse.access_token);
+
+      try {
+        // Fetch user info using access token
+        const { data } = await axios.get(
+          "https://www.googleapis.com/oauth2/v3/userinfo",
+          {
+            headers: {
+              Authorization: `Bearer ${tokenResponse.access_token}`,
+            },
+          }
+        );
+
+        console.log("User Info:", data);
+        dispatch(setUserInfo(data));
+        navigate("/");
+      } catch (error) {
+        console.error("Error fetching user info:", error);
+      }
+    },
+    onError: () => {
+      console.log("Login Failed");
+    },
+    flow: "implicit",
   });
+
+  const handleContinue = () => {
+    dispatch(setCurrentPage("otp"));
+  };
 
   return (
     <>
@@ -78,11 +112,12 @@ const Login: React.FC = () => {
             defaultMessage={"Continue"}
           />
         }
+        onClick={handleContinue}
         withIcon
       />
       <div className={styles.divider}>OR</div>
       <button
-      onClick={() => login()}
+        onClick={() => login()}
         type="button"
         className={`${styles.googleSignInButton} ${styles.socialButtons}`}
       >

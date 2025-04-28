@@ -1,16 +1,21 @@
 import React from "react";
-import { usePrivy } from "@privy-io/react-auth";
+// import { usePrivy } from "@privy-io/react-auth";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { FormattedMessage } from "react-intl";
+import { useDispatch } from "react-redux";
+import { resetCurrentPage } from "../../store/slices/pageSlice";
+import { resetUserInfo } from "../../store/slices/userSlice";
 
 const Dashboard: React.FC = () => {
   const navigate = useNavigate();
-  const { logout } = usePrivy();
+  const dispatch = useDispatch();
+  // const { logout } = usePrivy();
 
   const handleOnClink = () => {
-    sessionStorage.removeItem("language");
-    logout();
+    sessionStorage.clear();
+    dispatch(resetCurrentPage());
+    dispatch(resetUserInfo());
     navigate("/");
   };
 
