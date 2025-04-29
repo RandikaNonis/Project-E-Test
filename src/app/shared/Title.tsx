@@ -1,6 +1,6 @@
-import React from 'react';
-import styles from '../styles/Title.module.css';
-import '../../index.css';
+import React from "react";
+import styles from "../styles/Title.module.css";
+import "../../index.css";
 
 interface TitleProps {
   mainText: React.ReactNode;
@@ -13,12 +13,12 @@ const Title: React.FC<TitleProps> = ({
   highlightText,
   highlightTextColor,
 }) => {
-  const colorClassName = `color-${highlightTextColor.replace('#', '')}`;
+  const colorClassName = `color-${highlightTextColor.replace("#", "")}`;
 
   return (
     <p className={styles.title}>
       {mainText}
-      <span className={`${styles.highlightText} ${colorClassName}`}>{highlightText}</span>
+      <span className={`${styles.highlightText} ${colorClassName}`}> {highlightText}</span>
     </p>
   );
 };

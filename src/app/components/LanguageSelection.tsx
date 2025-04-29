@@ -31,7 +31,7 @@ const LanguageSelection: React.FC = () => {
         highlightText={
           <FormattedMessage
             id="languageSelection.highlightText"
-            defaultMessage=" Language?"
+            defaultMessage="Language?"
           />
         }
         highlightTextColor={"#0083C6"}

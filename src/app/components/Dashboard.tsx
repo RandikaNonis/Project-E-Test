@@ -16,14 +16,11 @@ const Dashboard: React.FC = () => {
     sessionStorage.clear();
     dispatch(resetCurrentPage());
     dispatch(resetUserInfo());
-    navigate("/");
+    navigate("/layout");
   };
 
   return (
     <div>
-      <h1>
-        <FormattedMessage id={"loveMessage"} defaultMessage={"I love you"} />
-      </h1>
       <h2>
         <FormattedMessage
           id={"testing"}
