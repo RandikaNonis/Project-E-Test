@@ -1,29 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Title from "../shared/Title";
-import {
-  Box,
-  FormControl,
-  InputLabel,
-  MenuItem,
-  Select,
-  SelectChangeEvent,
-  TextField,
-} from "@mui/material";
-// import { usePrivy } from "@privy-io/react-auth";
-import { Locale, useI18n } from "../../i18n";
+import { Box, TextField } from "@mui/material";
 import { FormattedMessage } from "react-intl";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
+import { setUserInfo } from "../../store/slices/userSlice";
+
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const mobileRegex = /^[0-9]{10}$/;
 
 const EveryThingLooksGood: React.FC = () => {
-  // const { user } = usePrivy();
+  const dispatch = useDispatch();
   const user = useSelector((state: RootState) => state.user.userInfo);
-  console.log(user);
-  const { locale, setLocale } = useI18n();
 
-  const handleChange = (event: SelectChangeEvent) => {
-    setLocale(event.target.value as Locale);
-  };
+  const [name, setName] = useState(user.name || "");
+  const [email, setEmail] = useState(user.email || "");
+  const [mobileNumber, setMobileNumber] = useState(user.mobileNumber || "");
+
+  const [nameError, setNameError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [mobileError, setMobileError] = useState("");
+
+  // Validation
+  useEffect(() => {
+    if (!name.trim()) {
+      setNameError("Name is required");
+    } else {
+      setNameError("");
+    }
+
+    if (!email.trim()) {
+      setEmailError("Email is required");
+    } else if (!emailRegex.test(email)) {
+      setEmailError("Invalid email address");
+    } else {
+      setEmailError("");
+    }
+
+    if (!mobileNumber.trim()) {
+      setMobileError("Mobile number is required");
+    } else if (!mobileRegex.test(mobileNumber)) {
+      setMobileError("Mobile number must be 10 digits");
+    } else {
+      setMobileError("");
+    }
+  }, [name, email, mobileNumber]);
+
+  // Update Redux store if no validation errors
+  useEffect(() => {
+    if (!nameError && !emailError && !mobileError) {
+      dispatch(
+        setUserInfo({
+          ...user,
+          name,
+          email,
+          mobileNumber,
+        })
+      );
+    }
+  }, [name, email, mobileNumber, nameError, emailError, mobileError]);
 
   return (
     <>
@@ -58,40 +93,43 @@ const EveryThingLooksGood: React.FC = () => {
           <TextField
             fullWidth
             required
-            id="outlined-required"
             label={
               <FormattedMessage id="user.nameLabel" defaultMessage="Name" />
             }
-            value={user?.name}
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            error={!!nameError}
+            helperText={nameError}
           />
         </div>
         <div>
           <TextField
             fullWidth
             required
-            id="outlined-disabled"
-            label={<FormattedMessage id="user.email" defaultMessage="Email" />}
             type="email"
-            value={user?.email}
+            label={<FormattedMessage id="user.email" defaultMessage="Email" />}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            error={!!emailError}
+            helperText={emailError}
           />
         </div>
-        <FormControl sx={{ marginTop: "15px" }} fullWidth>
-          <InputLabel id="language-label">
-            <FormattedMessage id="language" defaultMessage="Language" />
-          </InputLabel>
-          <Select
+        <div>
+          <TextField
             fullWidth
-            labelId="language-label"
-            id="language-select"
-            value={locale}
-            label={<FormattedMessage id="language" defaultMessage="Language" />}
-            onChange={handleChange}
-          >
-            <MenuItem value="en">English</MenuItem>
-            <MenuItem value="es">Español</MenuItem>
-            <MenuItem value="fr">Français</MenuItem>
-          </Select>
-        </FormControl>
+            required
+            label={
+              <FormattedMessage
+                id="user.mobileNumber"
+                defaultMessage="Mobile Number"
+              />
+            }
+            value={mobileNumber}
+            onChange={(e) => setMobileNumber(e.target.value)}
+            error={!!mobileError}
+            helperText={mobileError}
+          />
+        </div>
       </Box>
     </>
   );

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styles from "../styles/WrapperContent.module.css";
 import LanguageSelection from "./LanguageSelection";
 import SharedButton from "../shared/SharedButton";
@@ -10,41 +10,34 @@ import { FormattedMessage } from "react-intl";
 import Login from "./Login";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../../store";
-import { resetCurrentPage, setCurrentPage } from "../../store/slices/pageSlice";
+import { setCurrentPage } from "../../store/slices/pageSlice";
 import OTPScreen from "./OTPScreen";
 import AboutYourSelf from "./AboutYourSelf";
-// import OTPScreen from "./otpScreen";
 
 const WrapperContent: React.FC = () => {
-  const language = sessionStorage.getItem("language");
   const userDetails = useSelector((state: RootState) => state.user.userInfo);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const currentPage = useSelector((state: RootState) => state.page.currentPage);
 
-  useEffect(() => {
-    // When WrapperContent mounts, decide the initial page
-    console.log(userDetails);
-    if (userDetails && Object.keys(userDetails).length !== 0) {
-      dispatch(setCurrentPage("everything-looks-good"));
-    } else if (language) {
-      dispatch(setCurrentPage("login"));
-    } else {
-      dispatch(setCurrentPage("language-selection"));
-    }
-  }, [dispatch, language, userDetails]);
-
   const handleContinue = () => {
     if (currentPage === "language-selection") {
       dispatch(setCurrentPage("login"));
-    } else if (currentPage === "everything-looks-good") {
-      sessionStorage.setItem("userInfo", JSON.stringify(userDetails));
-      navigate("/");
     } else if (currentPage === "otp") {
       dispatch(setCurrentPage("about-your-self"));
     } else if (currentPage === "about-your-self") {
-      dispatch(resetCurrentPage());
-      navigate("/");
+      if (userDetails?.name && userDetails?.email) {
+        dispatch(setCurrentPage("everything-looks-good"));
+      }
+    } else if (currentPage === "everything-looks-good") {
+      if (
+        userDetails?.name &&
+        userDetails?.email &&
+        userDetails?.mobileNumber
+      ) {
+        sessionStorage.setItem("userInfo", JSON.stringify(userDetails));
+        navigate("/");
+      }
     }
   };
 

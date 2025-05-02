@@ -1,22 +1,37 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface UserState {
-    userInfo: object;
+    userInfo: {
+        name: string,
+        email: string,
+        mobileNumber: string,
+        picture: string,
+    };
 }
 
 const initialState: UserState = {
-    userInfo: {},
+    userInfo: {
+        name: '',
+        email: '',
+        mobileNumber: '',
+        picture: ''
+    },
 };
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
-        setUserInfo(state, action: PayloadAction<object>) {
+        setUserInfo(state, action: PayloadAction<UserState['userInfo']>) {
             state.userInfo = action.payload;
         },
         resetUserInfo(state) {
-            state.userInfo = {};
+            state.userInfo = {
+                name: '',
+                email: '',
+                mobileNumber: '',
+                picture: ''
+            };
         }
     },
 });

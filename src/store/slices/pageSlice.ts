@@ -5,7 +5,7 @@ interface PageState {
 }
 
 const initialState: PageState = {
-    currentPage: '/',
+    currentPage: 'language-selection',
 };
 
 const pageSlice = createSlice({
@@ -16,7 +16,7 @@ const pageSlice = createSlice({
             state.currentPage = action.payload;
         },
         resetCurrentPage(state) {
-            state.currentPage = '/';
+            state.currentPage = 'language-selection';
         }
     },
 });

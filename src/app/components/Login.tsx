@@ -1,21 +1,25 @@
 import Title from "../shared/Title";
 import { Box, TextField } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import { FormattedMessage } from "react-intl";
 import SharedButton from "../shared/SharedButton";
 import styles from "../styles/Login.module.css";
 import { useGoogleLogin } from "@react-oauth/google";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setCurrentPage } from "../../store/slices/pageSlice";
 import { setUserInfo } from "../../store/slices/userSlice";
-import { useNavigate } from "react-router-dom";
+import { RootState } from "../../store";
 // import { usePrivy } from "@privy-io/react-auth";
 // import { useNavigate } from "react-router-dom";
 
 const Login: React.FC = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  const [mobileNumber, setMobileNumber] = useState("");
+  const [mobileNumberError, setMobileNumberError] = useState("");
+  const currentUserInfo = useSelector(
+    (state: RootState) => state.user.userInfo
+  );
   // const { login, ready, authenticated } = usePrivy();
   // const navigate = useNavigate();
 
@@ -47,9 +51,14 @@ const Login: React.FC = () => {
           }
         );
 
-        console.log("User Info:", data);
-        dispatch(setUserInfo(data));
-        navigate("/");
+        const userInfo = {
+          name: data.name,
+          email: data.email,
+          mobileNumber: "",
+          picture: data.picture,
+        };
+        dispatch(setUserInfo(userInfo));
+        dispatch(setCurrentPage("everything-looks-good"));
       } catch (error) {
         console.error("Error fetching user info:", error);
       }
@@ -61,7 +70,40 @@ const Login: React.FC = () => {
   });
 
   const handleContinue = () => {
+    if (!mobileNumber) {
+      setMobileNumberError("Mobile number is required");
+      return;
+    }
+
+    if (!validateMobileNumber(mobileNumber)) {
+      setMobileNumberError("Enter a valid 10-digit mobile number");
+      return;
+    }
+
+    dispatch(
+      setUserInfo({
+        ...currentUserInfo,
+        mobileNumber: mobileNumber,
+      })
+    );
     dispatch(setCurrentPage("otp"));
+  };
+
+  const validateMobileNumber = (number: string): boolean => {
+    return /^[0-9]{10}$/.test(number);
+  };
+
+  const handleMobileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const value = e.target.value;
+    setMobileNumber(value);
+
+    if (!value) {
+      setMobileNumberError("Mobile number is required");
+    } else if (!validateMobileNumber(value)) {
+      setMobileNumberError("Enter a valid 10-digit mobile number");
+    } else {
+      setMobileNumberError("");
+    }
   };
 
   return (
@@ -101,6 +143,10 @@ const Login: React.FC = () => {
                 defaultMessage="Mobile Number"
               />
             }
+            value={mobileNumber}
+            onChange={handleMobileChange}
+            error={!!mobileNumberError}
+            helperText={mobileNumberError}
           />
         </div>
       </Box>
