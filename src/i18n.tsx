@@ -21,7 +21,7 @@ export const useI18n = () => {
 };
 
 export function I18nProvider({ children }: { children: React.ReactNode }) {
-  const storedLang = (sessionStorage.getItem("language") as Locale) || "";
+  const storedLang = (sessionStorage.getItem("language") as Locale) || "en";
   const [locale, setLocale] = useState<Locale>(storedLang);
 
   useEffect(() => {

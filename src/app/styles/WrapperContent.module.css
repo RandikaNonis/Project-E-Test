@@ -10,6 +10,15 @@
   width: 100%;
 }
 
+.topContent{
+  display: flex;
+  justify-content: space-between;
+}
+
+.noFlex {
+  display: block;
+}
+
 .topContent,
 .centerContent,
 .bottomContent {
@@ -28,4 +37,5 @@
 
 .logo {
   width: 32px;
+  object-fit: contain;
 }
