@@ -34,15 +34,22 @@ const MethodPurchasingEnergy: React.FC = () => {
           <FormControlLabel
             value="selfPurchase"
             control={<Radio />}
-            label={<FormattedMessage
-            id="methodPurchasingEnergy.mainText"
-            defaultMessage="What's your"
-          />}
+            label={
+              <FormattedMessage
+                id="methodPurchasingEnergy.optionOne"
+                defaultMessage="Self Purchase"
+              />
+            }
           />
           <FormControlLabel
             value="authorizeAgent"
             control={<Radio />}
-            label="Through an authorised agent"
+            label={
+              <FormattedMessage
+                id="methodPurchasingEnergy.optionTwo"
+                defaultMessage="Through an authorised agent"
+              />
+            }
           />
         </RadioGroup>
       </FormControl>

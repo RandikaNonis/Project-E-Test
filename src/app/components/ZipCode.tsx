@@ -1,4 +1,4 @@
-  import React from "react";
+import React from "react";
 import Title from "../shared/Title";
 import { Box, TextField } from "@mui/material";
 import { FormattedMessage } from "react-intl";
@@ -37,7 +37,9 @@ const ZipCode: React.FC = () => {
           <TextField
             fullWidth
             required
-            label={<FormattedMessage id="user.zipCode" defaultMessage="Zip code" />}
+            label={
+              <FormattedMessage id="user.zipCode" defaultMessage="Zip code" />
+            }
           />
         </div>
       </Box>

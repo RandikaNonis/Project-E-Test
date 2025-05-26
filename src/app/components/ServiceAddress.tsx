@@ -35,7 +35,12 @@ const ServiceAddress: React.FC = () => {
       >
         <FormControlLabel
           control={<Checkbox />}
-          label="Use my billing address as service address."
+          label={
+            <FormattedMessage
+              id="serviceAddress.checkBox"
+              defaultMessage="Use my billing address as service address."
+            />
+          }
         />
         <div>
           <TextField

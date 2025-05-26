@@ -39,14 +39,49 @@ const SecurityQuestion: React.FC = () => {
           fullWidth
           labelId="security-label"
           id="security-select"
-          label="Security question"
+          label={
+            <FormattedMessage
+              id={"securityQuestion"}
+              defaultMessage={"Security question"}
+            />
+          }
         >
-          <MenuItem value="one">Last four digits of SSN</MenuItem>
-          <MenuItem value="two">Mother's maiden name</MenuItem>
-          <MenuItem value="three">City of birth</MenuItem>
-          <MenuItem value="four">Date of birth</MenuItem>
-          <MenuItem value="five">Driver's license number</MenuItem>
-          <MenuItem value="six">Government-issued ID number</MenuItem>
+          <MenuItem value="one">
+            <FormattedMessage
+              id={"securityQuestion.optionOne"}
+              defaultMessage={"Last four digits of SSN"}
+            />
+          </MenuItem>
+          <MenuItem value="two">
+            <FormattedMessage
+              id={"securityQuestion.optionTwo"}
+              defaultMessage={"Mother's maiden name"}
+            />
+          </MenuItem>
+          <MenuItem value="three">
+            <FormattedMessage
+              id={"securityQuestion.optionThree"}
+              defaultMessage={"City of birth"}
+            />
+          </MenuItem>
+          <MenuItem value="four">
+            <FormattedMessage
+              id={"securityQuestion.optionFour"}
+              defaultMessage={"Date of birth"}
+            />
+          </MenuItem>
+          <MenuItem value="five">
+            <FormattedMessage
+              id={"securityQuestion.optionFive"}
+              defaultMessage={"Driver's license number"}
+            />
+          </MenuItem>
+          <MenuItem value="six">
+            <FormattedMessage
+              id={"securityQuestion.optionSix"}
+              defaultMessage={"Government-issued ID number"}
+            />
+          </MenuItem>
         </Select>
         <Box
           component="form"
@@ -63,12 +98,7 @@ const SecurityQuestion: React.FC = () => {
           <div>
             <TextField
               fullWidth
-              label={
-                <FormattedMessage
-                  id="answer"
-                  defaultMessage="Answer"
-                />
-              }
+              label={<FormattedMessage id="answer" defaultMessage="Answer" />}
             />
           </div>
         </Box>
